@@ -1,0 +1,16 @@
+// Create tabel and add all data type
+CREATE TABLE example_data_types(
+    id INT PRIMARY KEY,
+    NAME VARCHAR(50),
+    age INT,
+    salary DECIMAL(10, 2),
+    birthdate DATE,
+    login_time TIME,
+    created_at DATETIME,
+    is_active BOOLEAN,
+    gender ENUM('Male', 'Female', 'Other'),
+    colors SET
+        ('Red', 'Green', 'Blue'),
+        country CHAR(2),
+        description TEXT
+);

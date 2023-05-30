@@ -1,0 +1,5 @@
+// Create view in employees tabel
+CREATE VIEW employee_view AS
+SELECT id, name, age
+FROM employees
+WHERE department = 'IT';
