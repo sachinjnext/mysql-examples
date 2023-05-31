@@ -1,0 +1,32 @@
+-- Primary Key: A primary key is a column or a combination of columns that uniquely identifies each row in a table. It ensures that each row has a unique identifier and provides a fast lookup mechanism. Typically, a primary key is defined when creating a table.
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT
+);
+
+
+-- Foreign Key: A foreign key is a column or a set of columns in a table that refers to the primary key of another table. It establishes a relationship between two tables and enforces referential integrity.
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
+);
+
+
+-- Unique Key: A unique key is a column or a set of columns that ensures the values are unique, similar to a primary key. However, a unique key can allow NULL values, whereas a primary key does not. A table can have multiple unique keys.
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE,
+    phone_number VARCHAR(20) UNIQUE
+);
+
+
+-- Index: An index is a data structure that improves the speed of data retrieval operations on a table. It can be created on one or more columns and helps optimize query performance by allowing faster searching and sorting.
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10, 2),
+    INDEX idx_product_name (product_name)
+);

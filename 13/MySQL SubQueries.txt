@@ -1,0 +1,32 @@
+Let's consider a scenario where you have two tables: customers and orders. You want to retrieve the names of customers who have placed orders.
+
+Table customers:
++----+------------+
+| id | name       |
++----+------------+
+| 1  | John Smith |
+| 2  | Jane Doe   |
+| 3  | Bob Johnson|
++----+------------+
+
+Table orders:
++----+---------+------------+
+| id | cust_id | order_date |
++----+---------+------------+
+| 1  | 1       | 2022-01-01 |
+| 2  | 2       | 2022-02-05 |
+| 3  | 1       | 2022-03-10 |
++----+---------+------------+
+
+-- In this example, the subquery (SELECT cust_id FROM orders) retrieves the cust_id values from the orders table. The outer query then selects the name from the customers table for those cust_id values.
+SELECT name
+FROM customers
+WHERE id IN (SELECT cust_id FROM orders);
+
++------------+
+| name       |
++------------+
+| John Smith |
+| Jane Doe   |
++------------+
+

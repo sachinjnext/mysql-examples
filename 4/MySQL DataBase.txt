@@ -8,8 +8,4 @@ CREATE TABLE employees (
 
 // Insert record
 INSERT INTO employees (id, name, age, department)
-VALUES (1, 'John Smith', 30, 'IT'),
-       (2, 'Jane Doe', 35, 'HR'),
-       (3, 'Michael Johnson', 28, 'Sales');
-	   
-	   
+VALUES (1, 'John Smith', 30, 'IT'), (2, 'Jane Doe', 35, 'HR'), (3, 'Michael Johnson', 28, 'Sales');

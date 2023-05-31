@@ -1,0 +1,19 @@
+-- COUNT: The COUNT function returns the number of rows that match a specified condition.
+SELECT COUNT(*) AS total_customers
+FROM customers;
+
+-- SUM: The SUM function calculates the sum of a column's values.
+SELECT SUM(price) AS total_sales
+FROM orders;
+
+-- AVG: The AVG function calculates the average value of a column.
+SELECT AVG(age) AS average_age
+FROM employees;
+
+-- MAX: The MAX function retrieves the maximum value from a column.
+SELECT MAX(salary) AS highest_salary
+FROM employees;
+
+-- MIN: The MIN function retrieves the minimum value from a column.
+SELECT MIN(price) AS lowest_price
+FROM products;

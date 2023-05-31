@@ -1,0 +1,46 @@
+-- Equality Condition:
+SELECT column1, column2
+FROM table_name
+WHERE column1 = 'value';
+Inequality Condition:
+
+-- Inequality Condition:
+SELECT column1, column2
+FROM table_name
+WHERE column1 <> 'value';
+Comparison Conditions:
+
+-- Comparison Conditions:
+SELECT column1, column2
+FROM table_name
+WHERE column1 > 10 AND column2 < 20;
+LIKE Condition (Pattern Matching):
+
+-- LIKE Condition (Pattern Matching):
+SELECT column1, column2
+FROM table_name
+WHERE column1 LIKE 'abc%';
+NULL Condition:
+
+-- NULL Condition:
+SELECT column1, column2
+FROM table_name
+WHERE column1 IS NULL;
+NOT Condition:
+
+-- NOT Condition:
+SELECT column1, column2
+FROM table_name
+WHERE NOT column1 = 'value';
+Multiple Conditions (AND, OR):
+
+-- Multiple Conditions (AND, OR):
+SELECT column1, column2
+FROM table_name
+WHERE column1 > 10 OR column2 < 5;
+Combining Conditions:
+
+-- Combining Conditions:
+SELECT column1, column2
+FROM table_name
+WHERE (column1 > 10 OR column2 < 5) AND column3 = 'value';

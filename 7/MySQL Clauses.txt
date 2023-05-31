@@ -1,0 +1,52 @@
+-- SELECT Clause:
+SELECT column1, column2
+FROM table_name;
+
+ -- FROM Clause:
+SELECT column1, column2
+FROM table1
+JOIN table2 ON table1.id = table2.id;
+
+-- WHERE Clause:
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+
+-- GROUP BY Clause:
+SELECT column1, COUNT(*)
+FROM table_name
+GROUP BY column1;
+
+-- HAVING Clause:
+SELECT column1, COUNT(*)
+FROM table_name
+GROUP BY column1
+HAVING COUNT(*) > 5;
+
+-- ORDER BY Clause:
+SELECT column1, column2
+FROM table_name
+ORDER BY column1 ASC, column2 DESC;
+
+-- LIMIT Clause:
+SELECT column1, column2
+FROM table_name
+LIMIT 10;
+
+-- JOIN Clause:
+SELECT column1, column2
+FROM table1
+JOIN table2 ON table1.id = table2.id;
+
+-- INSERT INTO Clause:
+INSERT INTO table_name (column1, column2)
+VALUES (value1, value2);
+
+-- UPDATE Clause:
+UPDATE table_name
+SET column1 = value1, column2 = value2
+WHERE condition;
+
+-- DELETE Clause:
+DELETE FROM table_name
+WHERE condition;

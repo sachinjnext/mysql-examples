@@ -22,3 +22,5 @@ WHERE id = 0;
 DELETE FROM customers
 WHERE id = 0;
 
+// Delete full tabel
+DROP TABLE customers;

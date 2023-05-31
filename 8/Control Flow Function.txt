@@ -1,0 +1,20 @@
+-- IF Function: The IF function evaluates a condition and returns one value if the condition is true, and another value if the condition is false.
+SELECT column1, IF(column2 > 10, 'High', 'Low') AS status
+FROM table_name;
+
+-- CASE Function: The CASE function allows you to perform conditional branching and return different values based on specified conditions.
+SELECT column1,
+       CASE
+           WHEN column2 > 10 THEN 'High'
+           WHEN column2 > 5 THEN 'Medium'
+           ELSE 'Low'
+       END AS status
+FROM table_name;
+
+-- COALESCE Function: The COALESCE function returns the first non-null value from a list of expressions.
+SELECT column1, COALESCE(column2, column3, column4) AS result
+FROM table_name;
+
+-- NULLIF Function: The NULLIF function compares two expressions and returns null if they are equal, or the first expression if they are not equal.
+SELECT column1, NULLIF(column2, 0) AS result
+FROM table_name;

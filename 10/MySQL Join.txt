@@ -1,0 +1,24 @@
+-- INNER JOIN: In this example, the INNER JOIN combines rows from table1 and table2 where the id column values match.
+SELECT table1.column1, table2.column2
+FROM table1
+INNER JOIN table2 ON table1.id = table2.id;
+
+-- LEFT JOIN: In a LEFT JOIN, all rows from the left table (table1) are included, and matching rows from the right table (table2) are joined. If there is no match, NULL values are returned for the columns of the right table.
+SELECT table1.column1, table2.column2
+FROM table1
+INNER JOIN table2 ON table1.id = table2.id;
+
+-- RIGHT JOIN: A RIGHT JOIN is similar to a LEFT JOIN, but all rows from the right table (table2) are included, and matching rows from the left table (table1) are joined. If there is no match, NULL values are returned for the columns of the left table.
+SELECT table1.column1, table2.column2
+FROM table1
+RIGHT JOIN table2 ON table1.id = table2.id;
+
+-- FULL OUTER JOIN: MySQL does not directly support FULL OUTER JOIN, but it can be emulated using a combination of LEFT JOIN and RIGHT JOIN. It combines all rows from both tables and includes NULL values where there is no match.
+SELECT table1.column1, table2.column2
+FROM table1
+FULL OUTER JOIN table2 ON table1.id = table2.id;
+
+-- CROSS JOIN: A CROSS JOIN returns the Cartesian product of both tables, combining each row from the left table with every row from the right table.
+SELECT table1.column1, table2.column2
+FROM table1
+CROSS JOIN table2;
