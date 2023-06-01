@@ -1,12 +1,7 @@
-// MySQL Variable
-SET @name = 'John Doe';
-
-SELECT CONCAT('Hello, ', @name) AS Greeting;	
-
-// User Create time 
+// Calculate avg salary employees table
 -- Declare a variable to store the average salary
-DECLARE avg_salary DECIMAL(10, 2);
+SET @avg_salary = 0;	
 -- Calculate the average salary and assign it to the variable
-SELECT AVG(salary) INTO avg_salary FROM employees;
+SELECT AVG(salary) INTO @avg_salary FROM employees;
 -- Display the average salary
-SELECT avg_salary;
+SELECT @avg_salary;

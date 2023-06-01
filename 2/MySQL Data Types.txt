@@ -1,16 +1,17 @@
 // Create tabel and add all data type
-CREATE TABLE example_data_types(
+CREATE TABLE employees(
     id INT PRIMARY KEY,
-    NAME VARCHAR(50),
+    name VARCHAR(50),
+	phone VARCHAR(20),
+	email VARCHAR(255),
     age INT,
-    salary DECIMAL(10, 2),
-    birthdate DATE,
-    login_time TIME,
-    created_at DATETIME,
-    is_active BOOLEAN,
-    gender ENUM('Male', 'Female', 'Other'),
-    colors SET
-        ('Red', 'Green', 'Blue'),
-        country CHAR(2),
-        description TEXT
+	gender ENUM('Male', 'Female', 'Other'),
+	address LONGTEXT,
+    department VARCHAR(50),
+	salary DECIMAL(10, 2),
+	is_active BOOLEAN,
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+// Use point value for use DECIMAL

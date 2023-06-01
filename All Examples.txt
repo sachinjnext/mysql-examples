@@ -1,0 +1,247 @@
+-- Create Database 
+CREATE DATABASE sql_demo;
+
+-- Use Database
+USE sql_demo;
+
+
+** 2. MySQL Data Types **
+-- Create table in database
+CREATE TABLE employees(
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+	phone VARCHAR(20),
+	email VARCHAR(255),
+    age INT,
+	gender ENUM('Male', 'Female', 'Other'),
+	address LONGTEXT,
+    department VARCHAR(50),
+	salary DECIMAL(10, 2),
+	is_active BOOLEAN,
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Add column in table
+ALTER TABLE employees ADD COLUMN phone VARCHAR(20), ADD COLUMN email VARCHAR(255);
+
+-- Remove column in table
+ALTER TABLE employees DROP COLUMN email, DROP COLUMN phone;
+
+-- Add perticuler place column
+ALTER TABLE employees ADD COLUMN phone VARCHAR(20) AFTER name,ADD COLUMN email VARCHAR(255) AFTER name;
+ALTER TABLE employees ADD COLUMN salary DECIMAL(10, 2) AFTER email,ADD COLUMN joindate DATE AFTER email,ADD COLUMN is_active BOOLEAN AFTER email;
+
+-- Drop Table
+DROP TABLE employees;
+
+
+** 3. MySQL Varible **
+-- Calculate avg salary employees table
+-- Set a variable to store the average salary
+SET @avg_salary = 0;	
+-- Calculate the average salary and assign it to the variable
+SELECT AVG(salary) INTO @avg_salary FROM employees;
+-- Display the average salary
+SELECT @avg_salary;
+
+** 4. MySQL Database **
+-- INSERT record in database
+INSERT INTO employees (id, name, phone, email, age, gender, address, department, salary, is_active)
+VALUES (1, 'John Smith', '1234567890', 'test@gmail.com', 30, 'Male', '38, revenew, london, 365024.', 'admin', 25000, TRUE);
+
+INSERT INTO employees (id, name, phone, email, age, gender, address, department, salary, is_active)
+VALUES (2, 'Simi Rao', '1234567098', 'simi@gmail.com', 35, 'Female', '35, revenew row, london, 365024.', 'sales', 20000, FALSE), (3, 'Show mi', '1235467890', 'show@gmail.com', 60, 'other', '22, Itly Low, Itly, 512035.', 'IT', 28000, TRUE);
+
+
+** 5. MySQL Tabel & View **
+-- Create view in employees table for monitoring record
+CREATE VIEW employee_view AS
+SELECT id, name, phone, email, department, salary, is_active
+FROM employees
+WHERE department = 'IT';
+
+
+** 6. MySQL Queries (CRUD) **
+-- Create tabel
+CREATE TABLE jr_employees(
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+	phone VARCHAR(20),
+	email VARCHAR(255),
+    department VARCHAR(50),
+	salary DECIMAL(10, 2),
+	sr_employee_id INT,
+	FOREIGN KEY (sr_employee_id) REFERENCES employees (id),
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Add values 
+INSERT INTO jr_employees (id, name, phone, email, department, salary, sr_employee_id)
+VALUES (1, 'Shine Smith', '1234267890', 'shine@gmail.com', 'admin', 25000, 1);
+
+INSERT INTO jr_employees (id, name, phone, email, department, salary, sr_employee_id)
+VALUES (2, 'Sello Rao', '1234567125', 'sello@gmail.com','IT', 2000, 3), (3, 'shami mouse', '1278967890', 'shami@gmail.com','IT', 8000, 3);
+
+-- Read data in tabel
+SELECT * FROM jr_employees;
+
+-- Update record
+UPDATE jr_employees SET email = 'showmi@example.com', salary = 15000 WHERE id = 3;
+
+-- Delete Record perticuler
+DELETE FROM jr_employees WHERE id = 1;
+
+-- Delete full tabel
+DROP TABLE jr_employees;
+
+
+** 7. MySQL Clauses **
+-- SELECT Clause:
+SELECT name, salary FROM employees;
+
+-- FROM Clause:
+SELECT jr_employees.*,employees.name
+FROM employees
+JOIN jr_employees ON jr_employees.sr_employee_id = employees.id;
+
+-- WHERE Clause:
+SELECT * FROM jr_employees WHERE department = 'IT' AND salary > 5000;
+
+-- GROUP BY Clause
+SELECT department, SUM(salary) AS total_salary
+FROM employees
+GROUP BY department;
+-- output - Total department and total_salary ADMIn-1000 IT-11111 
+
+-- HAVING Clause:
+SELECT department, AVG(salary) AS average_salary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 20000;
+
+-- ORDER BY Clause: Use only one field
+SELECT id, name, department, salary FROM employees ORDER BY salary DESC;
+
+-- LIMIT Clause: Show limited record, show only 2 record
+SELECT id, name, department, salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 2;
+
+-- JOIN Clause: 
+SELECT jr_employees.*,employees.name
+FROM employees
+JOIN jr_employees ON jr_employees.sr_employee_id = employees.id;
+
+-- INSERT INTO Clause:
+INSERT INTO jr_employees (id, name, phone, email, department, salary, sr_employee_id)
+VALUES (1, 'Shine Smith', '1234267890', 'shine@gmail.com', 'admin', 25000, 1);
+
+-- UPDATE Clause
+UPDATE jr_employees SET email = 'showmi@example.com', salary = 15000 WHERE id = 3;
+
+-- DELETE Clause:
+DELETE FROM jr_employees WHERE id = 1;
+
+
+** 8. Control Flow Function **
+-- Check salary status 5000 up full and down stipend 
+SELECT id, name, salary,
+IF(salary > 5000, 'full', 'stipend') AS salary_status
+FROM jr_employees;
+
+-- CASE Function:
+SELECT id, name, salary,
+       CASE
+           WHEN salary < 3000 THEN 'Low'
+           WHEN salary >= 5000 AND salary < 7000 THEN 'Medium'
+           ELSE 'High'
+       END AS salary_range
+FROM jr_employees;
+
+-- COALESCE Function:
+SELECT id, COALESCE(name, 'Unknown') AS name,
+COALESCE(department, 'Unassigned') AS department, salary
+FROM employees;
+
+-- NULLIF Function: if you set 1000 so 1000 all record null
+SELECT id, name, department, NULLIF(salary, 1000) AS salary FROM jr_employees;
+
+
+** 9. MySQL Conditions **
+-- Equality Condition: IT record show
+SELECT id, name, department, salary
+FROM jr_employees
+WHERE department = 'IT';
+
+-- Inequality Condition: <, >, >=, <=, !=
+SELECT id, name, department, salary FROM employees WHERE salary <= 20000;
+
+-- Comparison Conditions:
+SELECT id, name, department, salary FROM employees WHERE salary BETWEEN 10000 AND 20000;
+
+-- LIKE Condition (Pattern Matching):
+SELECT id, name, department, salary FROM employees WHERE name LIKE '%John%'; 
+
+-- NULL Condition:
+SELECT id, name, department, salary FROM jr_employees WHERE salary IS NULL;
+SELECT id, name, department, salary FROM jr_employees WHERE salary IS NOT NULL;
+
+-- NOT Condition:
+SELECT id, name, department, salary FROM employees WHERE department <> 'Sales'; // Sales remove, all data show 
+
+-- Multiple Conditions (AND, OR):
+SELECT id,name, department, salary FROM jr_employees WHERE (department = 'Admin' AND salary > 2000) OR (department = 'IT' AND salary < 10000);
+
+-- Combining Conditions:
+SELECT id, name, department, salary FROM jr_employees WHERE department = 'Admin' AND salary > 2000;
+
+
+** 10. MySQL Join **
+-- INNER JOIN:
+SELECT jr_employees.*,employees.name FROM employees INNER JOIN jr_employees ON jr_employees.sr_employee_id = employees.id;
+
+-- LEFT JOIN: 
+SELECT j.id, j.name, e.department FROM jr_employees j LEFT JOIN employees e ON j.sr_employee_id = e.id;
+
+-- RIGHT JOIN: find all departmentin jr employees table, if employees in no rec show null and see only department
+SELECT j.id, j.name, e.department FROM jr_employees j RIGHT JOIN employees e ON j.sr_employee_id = e.id;
+
+-- FULL OUTER JOIN:
+(SELECT j.id, j.name, e.department FROM jr_employees j RIGHT JOIN employees e ON j.sr_employee_id = e.id) UNION (SELECT j.id, j.name, e.department FROM jr_employees j LEFT JOIN employees e ON j.sr_employee_id = e.id);
+
+-- CROSS JOIN: all 5 record multi with 3 and assign all employees department
+SELECT j.id, j.name, e.department FROM jr_employees j CROSS JOIN employees e;
+
+** 11. MySQL key **
+-- Primary Key:
+CREATE TABLE manager ( id INT PRIMARY KEY, name VARCHAR(50), email VARCHAR(255) UNIQUE, department VARCHAR(50), project VARCHAR(255), createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP );
+
+-- Foreign Key: See 6 example CRUD
+
+-- Unique Key: See up Primary example
+
+-- Index: 
+CREATE INDEX idx_employees_id ON employees (name, department);
+
+** 12. Aggregate Function**
+-- COUNT: total employees - 5
+SELECT COUNT(*) AS total_jr_employees FROM jr_employees;
+
+-- SUM: 
+SELECT department, SUM(salary) AS total_salary FROM employees GROUP BY department;
+
+-- AVG:
+SELECT department, AVG(salary) AS average_salary FROM jr_employees GROUP BY department HAVING AVG(salary) > 2000;
+
+-- MAX:
+SELECT MAX(salary) AS max_salary FROM employees;
+
+-- MIN:
+SELECT MIN(salary) AS max_salary FROM employees;
+
+** 13. MySQL SubQueries **
+-- SubQueries: AVg 20,000 so 20,000 up rec show 
+SELECT id, name, salary FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);

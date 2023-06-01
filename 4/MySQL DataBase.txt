@@ -1,11 +1,19 @@
 // Create employees table
-CREATE TABLE employees (
-  id INT PRIMARY KEY,
-  name VARCHAR(50),
-  age INT,
-  department VARCHAR(50)
+CREATE TABLE employees(
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+	phone VARCHAR(20),
+	email VARCHAR(255),
+    age INT,
+	gender ENUM('Male', 'Female', 'Other'),
+	address LONGTEXT,
+    department VARCHAR(50),
+	salary DECIMAL(10, 2),
+	is_active BOOLEAN,
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 // Insert record
-INSERT INTO employees (id, name, age, department)
-VALUES (1, 'John Smith', 30, 'IT'), (2, 'Jane Doe', 35, 'HR'), (3, 'Michael Johnson', 28, 'Sales');
+INSERT INTO employees (id, name, phone, email, age, gender, address, department, salary, is_active)
+VALUES (1, 'John Smith', '1234567890', 'test@gmail.com', 30, 'Male', '38, revenew, london, 365024.', 'admin', 25000, TRUE);
